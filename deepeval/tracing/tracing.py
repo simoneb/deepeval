@@ -42,6 +42,7 @@ from deepeval.tracing.types import (
 )
 from deepeval.tracing.utils import (
     Environment,
+    prepare_tool_call_input_parameters,
     replace_self_with_class_name,
     make_json_serializable,
     perf_counter_to_datetime,
@@ -871,10 +872,10 @@ class Observer:
                         ToolCall(
                             name=child.name,
                             description=child.description,
-                            input_parameters=make_json_serializable(
+                            input_parameters=prepare_tool_call_input_parameters(
                                 child.input
                             ),
-                            output=make_json_serializable(child.output),
+                            output=child.output,
                         )
                     )
 
